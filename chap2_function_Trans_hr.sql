@@ -1,0 +1,60 @@
+-- (4) 변환 함수
+------------------------------------------------------------------
+
+-- 1) TO_CHAR ( ) : 문자형으로 변환
+-- TO_CHAR(날짜데이터, '출력형식') => 날짜를 문자열로 변환
+SELECT SYSDATE,
+       TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+  FROM DUAL;
+  
+SELECT SYSDATE,
+       LENGTH(TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
+  FROM DUAL;
+
+-- AM | PM : 오전 오후 출력
+SELECT SYSDATE,
+       TO_CHAR(SYSDATE, 'YYYY-MM-DD DY AM HH:MI:SS')
+  FROM DUAL;
+-- 24시간 기준으로 출력
+SELECT SYSDATE,
+       TO_CHAR(SYSDATE, 'YYYY-MM-DD DY AM HH24:MI:SS')
+  FROM DUAL;
+
+-- '9'는 자릿수를 나타내지만 빈자리를 채우지는 않는다.
+SELECT TO_CHAR(123456, '9999999')
+  FROM DUAL;
+-- '0' 자릿수를 나타내며 빈자리를 0으로 채워줌
+SELECT TO_CHAR(123456, '00000000')
+  FROM DUAL;
+  
+SELECT FIRST_NAME,
+       SALARY,
+       TO_CHAR(SALARY, 'L999,999')
+  FROM EMPLOYEES;
+  
+-- 2) TO_DATE ( ) : 숫자나 문자 데이터를 날짜로 변환
+-- 입사일이 2006년 1월 3일인 사원을 검색
+SELECT FIRST_NAME,
+       HIRE_DATE
+  FROM EMPLOYEES
+ WHERE HIRE_DATE = '06/01/03';
+ 
+SELECT FIRST_NAME,
+       HIRE_DATE
+  FROM EMPLOYEES
+-- WHERE HIRE_DATE = 20060103; => INCONSISTENT DATATYPE / ERROR
+ WHERE HIRE_DATE = TO_DATE(20060103, 'YYYYMMDD');
+ 
+SELECT FIRST_NAME,
+       HIRE_DATE
+  FROM EMPLOYEES
+ WHERE HIRE_DATE = TO_DATE(20060103);
+ 
+-- 3) TO_NUMBER ( ) : 문자 데이터를 숫자로 변환
+SELECT '10000' + '20000' -- => 30000 자동 계산
+--SELECT '10,000' + '20,000' => 계산 불가능 INVALID NUMBER / ERROR
+  FROM DUAL;
+  
+SELECT TO_NUMBER ( '10,000', '99,999')
+     + TO_NUMBER ('20,000', '99,999')
+  FROM DUAL;
