@@ -23,7 +23,8 @@ SELECT FIRST_NAME,
        DEPARTMENT_ID,
        DECODE (DEPARTMENT_ID, 90, 'Executive',
                               60, 'IT', 
-                              100, 'Finance') AS 부서이름
+                              100, 'Finance',
+                              'DEFAULT') AS 부서이름
   FROM EMPLOYEES;
   
 -- 3) CASE ( ) : IF ~ ELSE IF 와 비슷한 역할
@@ -35,6 +36,7 @@ SELECT FIRST_NAME,
        THEN 'IT'
        WHEN DEPARTMENT_ID = 100
        THEN 'Finance'
+       ELSE 'DEFAULT'
    END AS 부서명
   FROM EMPLOYEES;
   
