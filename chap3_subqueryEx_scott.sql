@@ -12,7 +12,7 @@ SELECT ENAME,
 AND ENAME <> UPPER('SMITH');
        
 --2) 부서별로 가장 급여를 많이 받는 사원의 정보를 출력
- SELECT EMPNO,
+SELECT EMPNO,
        ENAME,
        SAL
   FROM EMP
